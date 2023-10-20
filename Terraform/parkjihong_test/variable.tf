@@ -13,6 +13,15 @@ variable "ec2_bastion_eip_name" {
 variable "server_port" {
   type = string
 }
+#ssh_port
+variable "ssh_port" {
+  type = string
+}
+
+#k8s_port
+variable "k8s_port" {
+  type = string
+}
 
 ##bastion
 variable "bastion_ec2" {
@@ -40,7 +49,13 @@ variable "bastion_image_id" {
 }
 
 #security
-variable "instance_security_group_name" {
+variable "bastion_security_group_name" {
+  type = string
+}
+variable "masternode_security_group_name" {
+  type = string
+}
+variable "workernode_security_group_name" {
   type = string
 }
 

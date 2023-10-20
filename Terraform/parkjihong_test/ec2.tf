@@ -6,8 +6,8 @@ resource "aws_instance" "bastion" {
   key_name               = aws_key_pair.mykey.key_name
 
   root_block_device {
-    volume_size = 20
-    volume_type = "gp3"
+    volume_size           = 20
+    volume_type           = "gp3"
     delete_on_termination = true
   }
 
@@ -20,9 +20,14 @@ resource "aws_instance" "bastion" {
 resource "aws_instance" "masternode" {
   ami                    = var.bastion_image_id == "" ? data.aws_ami.ubuntu.id : var.bastion_image_id
   instance_type          = "t3.medium"
-  vpc_security_group_ids = [aws_security_group.bastion.id]
+  vpc_security_group_ids = [aws_security_group.masternode.id]
   subnet_id              = aws_subnet.pri2a11.id
   key_name               = aws_key_pair.mykey.key_name
+  user_data              = file("${path.module}/userdata.sh")
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tags = {
     Name = var.masternode
@@ -33,9 +38,10 @@ resource "aws_instance" "masternode" {
 resource "aws_instance" "workernode1" {
   ami                    = var.bastion_image_id == "" ? data.aws_ami.ubuntu.id : var.bastion_image_id
   instance_type          = "t3.medium"
-  vpc_security_group_ids = [aws_security_group.bastion.id]
+  vpc_security_group_ids = [aws_security_group.workernode.id]
   subnet_id              = aws_subnet.pri2a12.id
   key_name               = aws_key_pair.mykey.key_name
+  iam_instance_profile   = aws_iam_instance_profile.ec2_s3_profile.name
 
   tags = {
     Name = var.workernode1
@@ -46,9 +52,10 @@ resource "aws_instance" "workernode1" {
 resource "aws_instance" "workernode2" {
   ami                    = var.bastion_image_id == "" ? data.aws_ami.ubuntu.id : var.bastion_image_id
   instance_type          = "t3.medium"
-  vpc_security_group_ids = [aws_security_group.bastion.id]
+  vpc_security_group_ids = [aws_security_group.workernode.id]
   subnet_id              = aws_subnet.pri2c21.id
   key_name               = aws_key_pair.mykey.key_name
+  iam_instance_profile   = aws_iam_instance_profile.ec2_s3_profile.name
 
   tags = {
     Name = var.workernode2

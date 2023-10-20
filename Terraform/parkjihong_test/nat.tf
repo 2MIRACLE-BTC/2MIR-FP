@@ -26,6 +26,6 @@ resource "aws_nat_gateway" "gw_a" {
 ##ec2 eip
 resource "aws_eip" "bastion_eip" {
   #vpc       = true
-  domain = "vpc"
-  instance  = aws_instance.bastion.id
+  domain   = "vpc"
+  instance = aws_instance.bastion.id
 }

@@ -2,11 +2,13 @@
 eip_name_2a = "tf-eip-2a"
 eip_name_2c = "tf-eip-2c"
 
-nat_gateway_name = "tf-nat-public"
+nat_gateway_name     = "tf-nat-public"
 ec2_bastion_eip_name = "tf-bastion-eip"
 
 #ec2
 server_port      = 80
+ssh_port         = 22
+k8s_port         = 6443
 bastion_ec2      = "bastion"
 bastion_image_id = ""
 masternode       = "masternode"
@@ -14,7 +16,9 @@ workernode1      = "workernode1"
 workernode2      = "workernode2"
 
 #security_group
-instance_security_group_name = "bastion_security"
+bastion_security_group_name    = "bastion_security"
+masternode_security_group_name = "master_node_security"
+workernode_security_group_name = "worker_node_security"
 
 ##subnet public, private
 #public
