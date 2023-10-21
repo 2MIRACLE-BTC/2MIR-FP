@@ -38,11 +38,27 @@ sh ~/k8sSetup/installkubeadm.sh
 if [ "$hostname" = "K8S-MASTER" ]; then
     # 마스터 노드 진행
     sudo hostnamectl hostname K8S-MASTER
-    sh kubeadminit.sh
-    sh calicosetup.sh
-    sh calico-setting.sh
 
-else
-    # 워커 노드 진행
-    echo "마스터 노드에서 생성된 kubeadm join 실행 필요"
-fi
+    sh kubeadminit.sh
+    if [ $? -eq 0 ]; then
+        echo "kubeadminit.sh completed successfully"
+        sh calicosetup.sh
+        if [ $? -eq 0 ]; then
+            echo "calicosetup.sh completed successfully"
+            sh calico-setting.sh
+            if [ $? -eq 0 ]; then
+                echo "calico-setting.sh completed successfully"
+            else
+                echo "calico-setting.sh failed"
+            fi
+        else
+            echo "calicosetup.sh failed"
+        fi 
+    else 
+      echo "kubeadminit.sh failed"
+    fi
+
+else 
+    # 워커 노드 진행 
+    echo "마스터 노드에서 생성된 kubeadm join 실행 필요" 
+fi 
