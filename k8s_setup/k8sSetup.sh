@@ -1,9 +1,19 @@
 #!/bin/bash
 
 ### 관련 파일은 git를 통해 설치
+# 각 노드의 역할, 숫자에 맞게 호스트 네임 정하기
+myPriIP=$(ip addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v 127.0.0.1 | awk -F'.' '{print $3"."$4}')
+if ["$myPriIP" = "10.10"]; then
+    # 마스터 노드
+    sudo hostnamectl hostname k8s-MASTER
+else
+    # 워커 노드
+    sudo hostnamectl hostname k8s-WORKER$myPriIP
+fi
+
 ### 변수 선언
 hostname=$(hostname)
-#myPriIP=$(ip addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v 127.0.0.1 | awk -F'.' '{print $3"."$4}')
+
 
 ### [공통 작업] 호스트 파일에 노드 ip, name 추가
 sudo sh -c 'cat >> /etc/hosts <<EOF

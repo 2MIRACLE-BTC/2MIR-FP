@@ -20,6 +20,6 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' config.toml
 cd ~/
 
 sudo systemctl restart containerd
-sudo systemctl status containerd
+#sudo systemctl status containerd
 
 ls -l  /run/containerd/containerd.sock
