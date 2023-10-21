@@ -11,8 +11,14 @@ variable "server_port" {
   type        = number
 }
 
-# 서버 포트 변수(Node 전용)
-variable "Node_server_port" {
+# 서버 포트 변수(WorkerNode 전용)
+variable "WorkerNode_server_port" {
+  description = "for node"
+  type        = number
+}
+
+# 서버 포트 변수(MasterNode 전용)
+variable "MasterNode_server_port" {
   description = "for node"
   type        = number
 }

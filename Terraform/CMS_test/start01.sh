@@ -571,8 +571,8 @@ resource "aws_security_group" "MIR_BASTION_SG" {
 }
 ############################## Master Node 보안그룹 생성 (나중에 추가 제한 필요)
 resource "aws_security_group" "MIR_MasterNode_SG" {
-  name_prefix = "MIR_WorkerNode_SG-"
-  description = "for worker ec SG"
+  name_prefix = "MIR_MasterNode_SG-"
+  description = "for Master ec SG"
   vpc_id      = aws_vpc.main.id
 
   ingress {
@@ -589,7 +589,7 @@ resource "aws_security_group" "MIR_MasterNode_SG" {
     to_port     = var.MasterNode_server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    security_groups = aws_security_group.MIR_WorkerNode_SG.id
+    security_groups = [aws_security_group.MIR_WorkerNode_SG.id]
   }
 
   ingress {
@@ -758,4 +758,6 @@ echo $?
 ls
 terraform init
 export TF_VAR_myName="MIR-$(date +'%H%M')";\
+#terraform plan
 terraform apply -auto-approve;
+echo 'terraform apply complete'

@@ -16,7 +16,7 @@ root_block_device {
   }
 
   /*# 유저데이터 지정
-  user_data = templatefile("userdata3.tpl", {
+  user_data = templatefile("userdata1.tpl", {
     rds_endpoint = aws_db_instance.tf-db.address
     db_user      = var.db_user
     db_password  = var.db_password
@@ -49,7 +49,7 @@ resource "aws_eip" "MIR_BASTION_EIP" {
 resource "aws_instance" "MIR_A_Master_01" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
-  vpc_security_group_ids = [aws_security_group.MIR_Node_SG.id]
+  vpc_security_group_ids = [aws_security_group.MIR_MasterNode_SG.id]
   subnet_id              = aws_subnet.pri_A_01.id # 서브넷 ID로 변경
   private_ip             = "172.16.11.10"
 
@@ -63,7 +63,7 @@ root_block_device {
     delete_on_termination = true
   }
   tags = {
-    Name = "${var.myName}-forWorkerA-01"
+    Name = "${var.myName}-forMasterA-01"
   }  
 }
 
@@ -72,7 +72,7 @@ root_block_device {
 resource "aws_instance" "MIR_A_WK_01" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
-  vpc_security_group_ids = [aws_security_group.MIR_Node_SG.id]
+  vpc_security_group_ids = [aws_security_group.MIR_WorkerNode_SG.id]
   subnet_id              = aws_subnet.pri_A_01.id # 서브넷 ID로 변경
   private_ip             = "172.16.11.101"
 
@@ -94,7 +94,7 @@ root_block_device {
 resource "aws_instance" "MIR_C_WK_01" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
-  vpc_security_group_ids = [aws_security_group.MIR_Node_SG.id]
+  vpc_security_group_ids = [aws_security_group.MIR_WorkerNode_SG.id]
   subnet_id              = aws_subnet.pri_C_01.id # 서브넷 ID로 변경
   private_ip             = "172.16.21.101"
 
@@ -143,16 +143,62 @@ resource "aws_security_group" "MIR_BASTION_SG" {
     Name = "MIR-BastionSG"
   }
 }
-############################## Node 보안그룹 생성 (나중에 추가 제한 필요)
-resource "aws_security_group" "MIR_Node_SG" {
-  name_prefix = "MIR_Node_SG-"
+############################## Master Node 보안그룹 생성 (나중에 추가 제한 필요)
+resource "aws_security_group" "MIR_MasterNode_SG" {
+  name_prefix = "MIR_MasterNode_SG-"
+  description = "for Master ec SG"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description = "allow port for asg"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "allow port for asg"
+    from_port   = var.MasterNode_server_port
+    to_port     = var.MasterNode_server_port
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.MIR_WorkerNode_SG.id]
+  }
+
+  ingress {
+    description = "SSH from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true # 새 보안그룹 생성시 생성 전에 삭제
+  }
+
+  tags = {
+    Name = "MIR-NodeSG"
+  }
+}
+############################## Worker Node 보안그룹 생성 (나중에 추가 제한 필요)
+resource "aws_security_group" "MIR_WorkerNode_SG" {
+  name_prefix = "MIR_WorkerNode_SG-"
   description = "for master ec SG"
   vpc_id      = aws_vpc.main.id
 
   ingress {
     description = "allow port for asg"
-    from_port   = var.Node_server_port
-    to_port     = var.Node_server_port
+    from_port   = var.WorkerNode_server_port
+    to_port     = var.WorkerNode_server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

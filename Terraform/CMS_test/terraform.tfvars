@@ -2,7 +2,8 @@ image_id                     = "ami-0c9c942bd7bf113a2" # Ubuntu22.04
 instance_type                = "t3.large"
 instance_security_group_name = "WEB_SG-"
 server_port                  = 0
-Node_server_port             = 0
+WorkerNode_server_port       = 0
+MasterNode_server_port       = 0
 
 #alb_server_port         = 80
 #alb_security_group_name = "ALB_SG-"
