@@ -3,6 +3,10 @@ curl -L https://github.com/projectcalico/calico/releases/latest/download/v3.26.1
 chmod +x ./calicoctl
 sudo mv ./calicoctl /usr/bin
 
+cat << 'EOF' >> ~/.bashrc
+export PATH="/usr/bin/calicoctl:$PATH"
+EOF;
+~/.bashrc
 
 calicoctl get ippool -o wide
 
