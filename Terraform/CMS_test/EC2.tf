@@ -3,7 +3,8 @@ resource "aws_instance" "MIR_BASTION" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
   vpc_security_group_ids = [aws_security_group.MIR_BASTION_SG.id]
-  subnet_id              = aws_subnet.pub_A_01.id # 서브넷 ID로 변경
+  subnet_id              = aws_subnet.pub_A_10.id # 서브넷 ID로 변경
+  private_ip             = "172.16.10.10"
 
   # 키페어 지정
   key_name = aws_key_pair.mykey.key_name
@@ -50,7 +51,7 @@ resource "aws_instance" "MIR_A_Master_01" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
   vpc_security_group_ids = [aws_security_group.MIR_MasterNode_SG.id]
-  subnet_id              = aws_subnet.pri_A_01.id # 서브넷 ID로 변경
+  subnet_id              = aws_subnet.pri_A_11.id # 서브넷 ID로 변경
   private_ip             = "172.16.11.10"
 
   # 키페어 지정
@@ -73,7 +74,7 @@ resource "aws_instance" "MIR_A_WK_01" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
   vpc_security_group_ids = [aws_security_group.MIR_WorkerNode_SG.id]
-  subnet_id              = aws_subnet.pri_A_01.id # 서브넷 ID로 변경
+  subnet_id              = aws_subnet.pri_A_11.id # 서브넷 ID로 변경
   private_ip             = "172.16.11.101"
 
   # 키페어 지정
@@ -95,7 +96,7 @@ resource "aws_instance" "MIR_C_WK_01" {
   ami                    = data.aws_ami.ubuntu22.id
   instance_type          = var.instance_type # t3.large
   vpc_security_group_ids = [aws_security_group.MIR_WorkerNode_SG.id]
-  subnet_id              = aws_subnet.pri_C_01.id # 서브넷 ID로 변경
+  subnet_id              = aws_subnet.pri_C_21.id # 서브넷 ID로 변경
   private_ip             = "172.16.21.101"
 
   # 키페어 지정

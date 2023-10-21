@@ -29,7 +29,9 @@ if [ "$hostname" = "K8S-MASTER" ]; then
     # 마스터 노드 진행
     sudo hostnamectl hostname K8S-MASTER
     sh kubeadminit.sh
-	sh calicosetup.sh
+    sh calicosetup.sh
+    sh calico-setting.sh
+
 else
     # 워커 노드 진행
     echo "마스터 노드에서 생성된 kubeadm join 실행 필요"
