@@ -27,9 +27,6 @@ resource "aws_nat_gateway" "MIR-nat-01" {
     Name = "MIR-nat-01"
   }
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-
   # 버전 갱신시 인스턴스 롤링 업데이트.
   lifecycle {
     create_before_destroy = true
@@ -53,9 +50,6 @@ resource "aws_nat_gateway" "MIR-nat-02" {
   tags = {
     Name = "MIR-nat-02"
   }
-
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
 
   # 버전 갱신시 인스턴스 롤링 업데이트.
   lifecycle {
