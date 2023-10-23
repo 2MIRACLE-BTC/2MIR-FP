@@ -1,32 +1,10 @@
-#terraform.tf
-eip_name_2a = "tf-eip-2a"
-eip_name_2c = "tf-eip-2c"
-
-nat_gateway_name     = "tf-nat-public"
-ec2_bastion_eip_name = "tf-bastion-eip"
+######################## terraform.tf
 
 #ec2
 tempPORT         = 0
 ssh_port         = 22
 k8s_port         = 6443
-workernode1      = "workernode1"
-workernode2      = "workernode2"
 
 ##### k8s 워커 설정
 WorkerAMI            = "ami-0c9c942bd7bf113a2" # Ubuntu22.04
 Worker_instance_type = "t3.large"
-
-
-#security_group
-bastion_security_group_name    = "bastion_security"
-
-##subnet public, private
-#public
-pub2a_subnet1_name = "tf-public-subnet-ap-norteast-2a"
-pub2c_subnet1_name = "tf-public-subnet-ap-norteast-2c"
-#private subnet 2a
-pri2a_subnet2_name = "tf-private-subnet1-ap-norteast-2a"
-pri2a_subnet3_name = "tf-private-subnet2-ap-norteast-2a"
-#private subnet 2c
-pri2c_subnet2_name = "tf-private-subnet1-ap-norteast-2c"
-pri2c_subnet3_name = "tf-private-subnet2-ap-norteast-2c"

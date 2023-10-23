@@ -27,7 +27,7 @@ resource "aws_security_group" "bastionSG" {
   }
 
   tags = {
-    Name = "MIR-Bastion-SG"
+    Name = "MIR-Bastion-SG-${var.uptime}"
   }
 
   lifecycle {

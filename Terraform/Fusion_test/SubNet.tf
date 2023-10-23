@@ -12,7 +12,7 @@ resource "aws_subnet" "pub_A_10" {
   map_public_ip_on_launch = "true"
 
   tags = {
-    Name                     = "MIR-subnet-PUB-A"
+    Name                     = "MIR-subnet-PUB-A-${var.uptime}"
     type                     = "public"
     "kubernetes.io/role/elb" = 1
   }
@@ -43,7 +43,7 @@ resource "aws_subnet" "pri_A_11" {
   map_public_ip_on_launch = "false"
 
   tags = {
-    Name                              = "MIR-subnet-PRI-A11"
+    Name                              = "MIR-subnet-PRI-A11-${var.uptime}"
     type                              = "private"
     "kubernetes.io/role/internal-elb" = 1
   }
@@ -88,7 +88,7 @@ resource "aws_subnet" "pri_C_21" {
   map_public_ip_on_launch = "false"
 
   tags = {
-    Name                              = "MIR-subnet-PRI-C21"
+    Name                              = "MIR-subnet-PRI-C21-${var.uptime}"
     type                              = "private"
     "kubernetes.io/role/internal-elb" = 1
   }

@@ -762,3 +762,5 @@ export TF_VAR_myName="MIR-$(date +'%H%M')";\
 #terraform plan
 terraform apply -auto-approve;
 #echo 'terraform apply complete'
+
+#export TF_VAR_uptime="MIR-$(date +'%H%M')"

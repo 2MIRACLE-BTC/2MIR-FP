@@ -15,7 +15,7 @@ resource "aws_nat_gateway" "nat-01" {
     create_before_destroy = true
   }
 
-  depends_on = [aws_internet_gateway.gw]
+  depends_on = [aws_internet_gateway.igw]
 }
 resource "aws_eip" "nat-eip-01" {
   domain = "vpc"
@@ -39,7 +39,7 @@ resource "aws_nat_gateway" "nat-02" {
     create_before_destroy = true
   }
 
-  depends_on = [aws_internet_gateway.gw]
+  depends_on = [aws_internet_gateway.igw]
 }
 resource "aws_eip" "nat-eip-02" {
   domain = "vpc"

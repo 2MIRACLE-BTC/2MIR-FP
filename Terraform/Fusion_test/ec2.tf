@@ -3,7 +3,7 @@
 
 # 키페어
 resource "aws_key_pair" "mykey" {
-  key_name   = "mykey"
+  key_name   = "mykey-${var.uptime}"
   public_key = file("mykey.pub")
 }
 
@@ -19,7 +19,7 @@ resource "aws_instance" "bastion" {
   key_name               = aws_key_pair.mykey.key_name
 
   tags = {
-    Name = "MIR-Bastion"
+    Name = "MIR-Bastion-${var.uptime}"
   }
 }
 ### EIP for 베스천
@@ -53,7 +53,7 @@ resource "aws_instance" "masternode" {
   }
 
   tags = {
-    Name = "MIR-k8s_Master"
+    Name = "MIR-k8s_Master-${var.uptime}"
   }
 }
 
@@ -79,7 +79,7 @@ resource "aws_instance" "workernode1" {
 
 
 # k8s 워커 C (172.16.21.101)
-resource "aws_instance" "workernode1" {
+resource "aws_instance" "workernode2" {
   ami                    = var.WorkerAMI
   instance_type          = var.Worker_instance_type
   vpc_security_group_ids = [aws_security_group.k8s_Worker_SG.id]
