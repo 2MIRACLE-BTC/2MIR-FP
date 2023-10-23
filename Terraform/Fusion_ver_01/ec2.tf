@@ -16,7 +16,7 @@ resource "aws_instance" "bastion" {
   private_ip             = "172.16.10.10"
 
   # 키페어 지정
-  key_name               = aws_key_pair.mykey.key_name
+  key_name = aws_key_pair.mykey.key_name
 
   tags = {
     Name = "MIR-Bastion-${var.uptime}"
@@ -24,10 +24,10 @@ resource "aws_instance" "bastion" {
 }
 ### EIP for 베스천
 resource "aws_eip" "bastion-EIP" {
-  domain = "vpc"
-  instance  = aws_instance.bastion.id
+  domain   = "vpc"
+  instance = aws_instance.bastion.id
 
-    tags = {
+  tags = {
     Name = "MIR-bastion-eip"
   }
 }
@@ -41,11 +41,11 @@ resource "aws_instance" "masternode" {
   private_ip             = "172.16.11.10"
 
   # EC2 - S3 연결
-  iam_instance_profile   = aws_iam_instance_profile.ec2_s3_profile.name
+  iam_instance_profile = aws_iam_instance_profile.ec2_s3_profile.name
 
   #키페어
-  key_name               = aws_key_pair.mykey.key_name
-  
+  key_name = aws_key_pair.mykey.key_name
+
   #user_data              = file("${path.module}/userdata.sh")
 
   lifecycle {
@@ -67,10 +67,10 @@ resource "aws_instance" "workernode1" {
   private_ip             = "172.16.11.101"
 
   # 키페어 지정
-  key_name               = aws_key_pair.mykey.key_name
-  
+  key_name = aws_key_pair.mykey.key_name
+
   # EC2 - S3 연결
-  iam_instance_profile   = aws_iam_instance_profile.ec2_s3_profile.name
+  iam_instance_profile = aws_iam_instance_profile.ec2_s3_profile.name
 
   tags = {
     Name = "MIR-A-Worker"
@@ -87,10 +87,10 @@ resource "aws_instance" "workernode2" {
   private_ip             = "172.16.21.101"
 
   # 키페어 지정
-  key_name               = aws_key_pair.mykey.key_name
-  
+  key_name = aws_key_pair.mykey.key_name
+
   # EC2 - S3 연결
-  iam_instance_profile   = aws_iam_instance_profile.ec2_s3_profile.name
+  iam_instance_profile = aws_iam_instance_profile.ec2_s3_profile.name
 
   tags = {
     Name = "MIR-C-Worker"

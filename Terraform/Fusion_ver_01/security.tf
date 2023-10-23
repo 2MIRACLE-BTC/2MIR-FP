@@ -57,7 +57,7 @@ resource "aws_security_group" "k8s_Master_SG" {
     from_port = var.k8s_port
     to_port   = var.k8s_port
     protocol  = "tcp"
-    self      = true  # 자신을 소스로 지정
+    self      = true # 자신을 소스로 지정
   }
 
   egress {
