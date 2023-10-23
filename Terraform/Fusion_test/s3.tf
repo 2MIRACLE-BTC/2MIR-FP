@@ -1,15 +1,10 @@
 resource "aws_s3_bucket" "MIR_S3" {
-  bucket = "MIR-s3-test" # 유니크한 버킷 이름을 지정해야 합니다.
+  bucket = "mir-s3-test-${var.uptime}" # 소문자, 하이픈만 사용가능
 
   tags = {
     Name        = "MIR-s3-test"
     Environment = "Dev"
   }
-}
-
-resource "aws_s3_bucket_acl" "MIR_S3_acl" {
-  bucket = aws_s3_bucket.MIR_S3.id
-  acl    = "private"
 }
 
 # S3 버킷에 접근 권한을 부여하는 IAM 정책

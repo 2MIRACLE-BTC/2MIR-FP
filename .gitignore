@@ -1,5 +1,6 @@
-/Terraform/CMS_test/mykey
-/Terraform/CMS_test/mykey.pub
-/Terraform/CMS_test/terraform.tfstate.backup
-/Terraform/CMS_test/terraform.tfstate
-Terraform/CMS_test/.terraform
+.terraform.lock.hcl
+.terraform/
+mykey
+mykey.pub
+terraform.tfstate
+terraform.tfstate.backup

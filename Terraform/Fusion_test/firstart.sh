@@ -21,5 +21,5 @@ fi
 ### </키페어 체크>
 
 terraform init
-export TF_VAR_uptime="MIR-$(date +'%H%M')"
+export TF_VAR_uptime="$(date +'%H%M')"
 terraform apply -auto-approve;

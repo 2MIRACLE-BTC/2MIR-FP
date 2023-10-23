@@ -53,7 +53,7 @@ resource "aws_instance" "masternode" {
   }
 
   tags = {
-    Name = "MIR-k8s_Master-${var.uptime}"
+    Name = "MIR-k8s_Master"
   }
 }
 
