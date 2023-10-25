@@ -9,8 +9,31 @@ variable "tempPORT" {
 variable "uptime" {
   description = "uptime"
   type        = string
-  default     = "%H%M"
+  default     = "$(date +'%H%M')"
 }
+
+############ VPC
+variable "Pub_net" {
+  description = "public subnet A. ip list."
+  type        = list(string)
+  default     = ["10", "20"]
+}
+variable "AZz" {
+  description = "for NAT."
+  type        = list(string)
+  default     = ["a", "c"]
+}
+variable "Pri_net_A" {
+  description = "private subnet A. ip list."
+  type        = list(string)
+  default     = ["11", "12", "13"]
+}
+variable "Pri_net_C" {
+  description = "private subnet A. ip list."
+  type        = list(string)
+  default     = ["21", "22", "23"]
+}
+
 
 ############ K8s 보안그룹
 #ssh_port

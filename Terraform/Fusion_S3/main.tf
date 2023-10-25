@@ -14,7 +14,7 @@ terraform {
     bucket  = "mir-s3-testate" # 미리 생성한 S3 이름 작성
     encrypt = true             # tfstate파일 암호화 설정
     # tfstate 저장 경로
-    key = "TEST-1629/terraform.tfstate"
+    key = "TEST-0902/terraform.tfstate"
 
   }
 }

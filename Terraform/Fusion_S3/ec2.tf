@@ -12,7 +12,7 @@ resource "aws_instance" "bastion" {
   ami                    = "ami-0c9c942bd7bf113a2" # Ubuntu22.04
   instance_type          = "t3.large"
   vpc_security_group_ids = [aws_security_group.bastionSG.id]
-  subnet_id              = aws_subnet.pub_A_10.id
+  subnet_id              = aws_subnet.pub[0].id
   private_ip             = "172.16.10.10"
 
   # 키페어 지정
@@ -37,7 +37,7 @@ resource "aws_instance" "masternode" {
   ami                    = "ami-0c9c942bd7bf113a2" # Ubuntu22.04
   instance_type          = "t3.large"
   vpc_security_group_ids = [aws_security_group.k8s_Master_SG.id]
-  subnet_id              = aws_subnet.pri_A_11.id
+  subnet_id              = aws_subnet.pri_A[0].id
   private_ip             = "172.16.11.10"
 
   # EC2 - S3 연결
@@ -63,7 +63,7 @@ resource "aws_instance" "workernode1" {
   ami                    = var.WorkerAMI
   instance_type          = var.Worker_instance_type
   vpc_security_group_ids = [aws_security_group.k8s_Worker_SG.id]
-  subnet_id              = aws_subnet.pri_A_11.id
+  subnet_id              = aws_subnet.pri_A[0].id
   private_ip             = "172.16.11.101"
 
   # 키페어 지정
@@ -83,7 +83,7 @@ resource "aws_instance" "workernode2" {
   ami                    = var.WorkerAMI
   instance_type          = var.Worker_instance_type
   vpc_security_group_ids = [aws_security_group.k8s_Worker_SG.id]
-  subnet_id              = aws_subnet.pri_C_21.id
+  subnet_id              = aws_subnet.pri_C[0].id
   private_ip             = "172.16.21.101"
 
   # 키페어 지정
