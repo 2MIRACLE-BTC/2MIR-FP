@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: parkargo
+  name: parkargo22
   namespace: argocd
 spec:
   project: default
