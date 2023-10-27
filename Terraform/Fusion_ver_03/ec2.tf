@@ -14,6 +14,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = [aws_security_group.bastionSG.id]
   subnet_id              = aws_subnet.pub_A_10.id
   private_ip             = "172.16.10.10"
+  user_data = file("${path.module}/userdata.sh")
 
   # 키페어 지정
   key_name = aws_key_pair.mykey.key_name
@@ -26,7 +27,6 @@ resource "aws_instance" "bastion" {
 resource "aws_eip" "bastion-EIP" {
   domain   = "vpc"
   instance = aws_instance.bastion.id
-  user_data = file("${path.module}/userdata.sh")
 
   lifecycle {
     create_before_destroy = true
