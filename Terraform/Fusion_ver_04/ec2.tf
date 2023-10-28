@@ -18,6 +18,12 @@ resource "aws_instance" "bastion" {
   # 키페어 지정
   key_name = aws_key_pair.mykey.key_name
 
+  # Root Block Device 설정
+  root_block_device {
+    volume_size = 30  # 여기에 원하는 볼륨 크기를 지정하세요.
+    volume_type = "gp2"
+  }
+
   tags = {
     Name = "MIR-Bastion-${var.uptime}"
   }
