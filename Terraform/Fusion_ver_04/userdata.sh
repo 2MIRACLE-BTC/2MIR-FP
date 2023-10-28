@@ -14,3 +14,11 @@ sha256sum -c kubectl.sha256
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+
+# docker install
+sudo apt  install docker.io
+sudo usermod -aG docker $USER
+
+# eksctl install
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
