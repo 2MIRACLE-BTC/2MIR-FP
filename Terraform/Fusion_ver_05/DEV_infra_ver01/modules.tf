@@ -15,10 +15,18 @@ output "vpc_id" {           # output "plan때 볼 이름"
   value = module.vpc.vpc_id # value = module.<모듈명>.<소스 아웃풋 명>
 }
 output "Bastion_subnet" {
-  value = module.vpc.pub_subnet_id[0]
+  value       = module.vpc.pub_subnet_id[0]
+  description = "172.16.10.10"
 }
-output "Pri_A_subnet_id" {
+output "Master_subnet" {
+  value       = module.vpc.pri_A_subnet_id[0]
+  description = "172.16.11.10"
+}
+output "worker_A_PRInet" {
   value = module.vpc.pri_A_subnet_id
+}
+output "worker_C_PRInet" {
+  value = module.vpc.pri_C_subnet_id
 }
 
 ### /modules/SG

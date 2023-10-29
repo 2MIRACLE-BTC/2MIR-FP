@@ -19,7 +19,7 @@ resource "aws_instance" "bastion" {
   key_name = aws_key_pair.mykey.key_name
 
   user_data              = file("${path.module}/userdata.sh")
-  
+
   tags = {
     Name = "MIR-Bastion"
     uptime  = "${var.uptime}"
@@ -42,7 +42,7 @@ resource "aws_instance" "masternode" {
   ami                    = "ami-0c9c942bd7bf113a2" # Ubuntu22.04
   instance_type          = "t3.large"
   vpc_security_group_ids = toset([data.terraform_remote_state.get_infra.outputs.K8s_Master_SG_id])
-  subnet_id              = data.terraform_remote_state.get_infra.outputs.Pri_A_subnet_id[0]
+  subnet_id              = data.terraform_remote_state.get_infra.outputs.Master_subnet
   private_ip             = "172.16.11.10"
 
   # EC2 - S3 연결

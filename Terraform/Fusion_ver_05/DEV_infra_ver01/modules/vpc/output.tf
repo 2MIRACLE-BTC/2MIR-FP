@@ -11,3 +11,7 @@ output "pub_subnet_id" {
 output "pri_A_subnet_id" {
   value = aws_subnet.pri_A[*].id
 }
+
+output "pri_C_subnet_id" {
+  value = aws_subnet.pri_C[*].id
+}
