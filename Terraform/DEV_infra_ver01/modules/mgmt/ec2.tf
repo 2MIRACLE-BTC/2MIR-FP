@@ -18,6 +18,8 @@ resource "aws_instance" "bastion" {
   # 키페어 지정
   key_name = aws_key_pair.mykey.key_name
 
+  user_data              = file("${path.module}/userdata.sh")
+  
   tags = {
     Name = "MIR-Bastion"
     uptime  = "${var.uptime}"
