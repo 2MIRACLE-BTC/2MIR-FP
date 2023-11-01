@@ -2,7 +2,7 @@
 #################### for DEV_EKS
 resource "aws_eks_node_group" "nodeg" {
   cluster_name    = aws_eks_cluster.EKS_cluster.name
-  node_group_name = "${var.project}-${var.TYPE}-node_group"
+  node_group_name = "${var.project}-${var.TYPE}-node-group"
   node_role_arn   = aws_iam_role.node-role.arn
   #subnet_ids      = [var.pri_A_subnet_id[1], var.pri_C_subnet_id[1]]
   subnet_ids      = [data.terraform_remote_state.get_infra.outputs.pri_A_subnet_id[1], data.terraform_remote_state.get_infra.outputs.pri_C_subnet_id[1]]

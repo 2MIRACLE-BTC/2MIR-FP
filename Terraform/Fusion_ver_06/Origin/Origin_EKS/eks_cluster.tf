@@ -1,7 +1,7 @@
 #################### /eks_cluster.tf
 #################### for DEV_EKS
 resource "aws_eks_cluster" "EKS_cluster" {
-  name     = "${var.project}-${var.TEAM}_eks"
+  name     = "${var.project}-${var.TEAM}-eks"
   version  = "1.27"
   role_arn = aws_iam_role.EKS_role.arn
   vpc_config {
