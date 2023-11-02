@@ -3,7 +3,7 @@
 2. dynamo DB 테이블 생성(파티션키는 아무렇게 적어도 됨. ex:LockID)
 
 [테라그런트 배포]
-1. sh getSource.sh
+1. ```sh getSource.sh```\
     안내문에 따라 backend_tfstate저장을 위한 S3이름, dynamo DB 테이블 이름 입력
     -> (Root)terragrunt.hcl에 자동 입력됨.
 
