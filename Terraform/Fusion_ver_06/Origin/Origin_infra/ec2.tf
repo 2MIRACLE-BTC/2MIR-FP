@@ -3,7 +3,7 @@
 
 # 키페어
 resource "aws_key_pair" "mykey" {
-  key_name   = "mykey-${var.uptime_L}-${var.TEAM}"
+  key_name   = "${var.project}-mykey-${var.uptime_L}-${var.TEAM}"
   public_key = file("mykey.pub")
 }
 

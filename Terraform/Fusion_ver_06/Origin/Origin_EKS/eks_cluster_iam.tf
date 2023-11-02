@@ -1,7 +1,7 @@
 #################### /eks_cluster_iam.tf
 #################### for DEV_EKS
 resource "aws_iam_role" "EKS_role" {
-  name               = "${var.project}-${var.TYPE}-cluster"
+  name               = "${var.project}-${var.TYPE}-cluster-${var.uptime_S}"
   assume_role_policy = <<POLICY
 {
     "Version": "2012-10-17",

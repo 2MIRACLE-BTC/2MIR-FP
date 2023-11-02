@@ -1,7 +1,7 @@
 #################### /eks_nodegroup_iam.tf
 #################### for DEV_EKS
 resource "aws_iam_role" "node-role" {
-  name = "${var.project}-${var.TYPE}-node-group"
+  name = "${var.project}-${var.TYPE}-node-group-${var.uptime_S}"
   assume_role_policy = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"

@@ -4,7 +4,7 @@ locals{
     # 공용
     project     = "MIR"
     uptime_L    = formatdate("YYYY-MM-DD'T 'hh:mm", timeadd(timestamp(), "9h"))
-    uptime_S    = formatdate("hh:mm", timeadd(timestamp(), "9h"))
+    uptime_S    = formatdate("hhmm", timeadd(timestamp(), "9h"))
     TYPE        = "NONE" # PROD*
     region      = "ap-northeast-2" # 도쿄
 

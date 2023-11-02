@@ -2,12 +2,6 @@
 
 ### git clone 이후 테라폼 최초 배포시 사용을 권장합니다 ###
 
-### <KTS 시간 동기화>
-echo "time check"
-sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
-date
-### </KTS 시간 동기화>
-
 ### <키페어 체크>
 echo "Check mykey"
 cd ./Origin/Origin_infra;
@@ -20,6 +14,7 @@ else
   ls | grep my
 fi
 ### </키페어 체크>
+
 
 ### <.terraform/ 체크>
 cd ../../DEV/DEV_infra;
@@ -54,8 +49,9 @@ fi
 echo "fmt"
 sleep "5"
 terragrunt run-all --terragrunt-ignore-external-dependencies --terragrunt-working-dir "./" fmt
-terragrunt run-all --terragrunt-ignore-external-dependencies --terragrunt-working-dir "./" apply
+echo "전체 환경 배포를 희망하면 다음 명령어를 입력하세요."
+echo "terragrunt run-all --terragrunt-ignore-external-dependencies --terragrunt-working-dir "./" apply"
 
 
-
+### terragrunt run-all --terragrunt-ignore-external-dependencies --terragrunt-working-dir "./" apply
 ### 삭제[각주 해제 금지] terragrunt run-all --terragrunt-ignore-external-dependencies --terragrunt-working-dir "./" destroy
