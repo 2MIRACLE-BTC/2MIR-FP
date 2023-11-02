@@ -24,7 +24,7 @@ terraform {
 ```
 terraform 파일 실행
 ```
-sh first.sh
+sh firstart.sh
 ```
 pem Key 다운로드 후 Bastion으로 접속하기
 ```
