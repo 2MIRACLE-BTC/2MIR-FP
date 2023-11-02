@@ -10,7 +10,7 @@
 2. ```sh first.sh```\
     쉘 파일이 자동으로 keypair, .terraform체크 후 init, fmt 진행.
 
-    <<DEV 전체 배포>>\
+    <<DEV 전체 배포>>
     ```
     terragrunt run-all --terragrunt-ignore-external-dependencies --terragrunt-working-dir "./DEV/" apply
     ```
