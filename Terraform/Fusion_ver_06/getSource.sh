@@ -1,8 +1,6 @@
 #!/bin/bash
 
 ### <초기화>
-#sed -i "/TF_STATE_S3/c\     TF_STATE_S3  = \"default\"" ./terragrunt.hcl
-#sed -i "/TF_DYNAMO_DB/c\     TF_DYNAMO_DB = \"default\"" ./terragrunt.hcl
 sed -i '/bucket  = /c\    bucket  = "example_TF_S3"' ./terragrunt.hcl
 sed -i '/dynamodb_table = /c\    dynamodb_table = "example_TF_DY"' ./terragrunt.hcl
 ### </초기화>
