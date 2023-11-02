@@ -7,7 +7,7 @@
     안내문에 따라 backend_tfstate저장을 위한 S3이름, dynamo DB 테이블 이름 입력
     -> (Root)terragrunt.hcl에 자동 입력됨.
 
-2. sh first.sh
+2. ```sh first.sh```\
     쉘 파일이 자동으로 keypair, .terraform체크 후 init, fmt 진행.
 
     <<DEV 전체 배포>>
