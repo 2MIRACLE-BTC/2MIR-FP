@@ -14,6 +14,9 @@ resource "aws_eks_node_group" "nodeg" {
   update_config {
     max_unavailable = 1
   }
+
+  instance_types = ["m6i.xlarge"]
+
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
