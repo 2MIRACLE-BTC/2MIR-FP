@@ -294,17 +294,24 @@ alertmanager:
         equal:
           - 'namespace'
     route:
-      group_by: ['namespace']
+      group_by: []
       group_wait: 30s
       group_interval: 5m
       repeat_interval: 12h
-      receiver: 'null'
-      routes:
-      - receiver: 'null'
-        matchers:
-          - alertname =~ "InfoInhibitor|Watchdog"
+      receiver: 'null1'
+        #routes:
+        #- receiver: 'null1'
+        #matchers:
+        #- alertname =~ "InfoInhibitor|Watchdog"
     receivers:
-    - name: 'null'
+    - name: 'null1'
+      email_configs:
+       - to: 'MIRGOD001@gmail.com'
+         from: 'MIRGOD001@gmail.com'
+         smarthost: smtp.gmail.com:587
+         auth_username: 'MIRGOD001@gmail.com'
+         auth_password: lkfe veit zthg xsex
+         send_resolved: true
     templates:
     - '/etc/alertmanager/config/*.tmpl'
 
@@ -694,7 +701,7 @@ alertmanager:
 
     ## Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
     ## running cluster equal to the expected size.
-    replicas: 1
+    replicas: 2
 
     ## Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
     ## [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
@@ -918,7 +925,7 @@ grafana:
   ##
   defaultDashboardsTimezone: utc
 
-  adminPassword: prom-operator
+  adminPassword: btc
 
   rbac:
     ## If true, Grafana PSPs will be created
@@ -2687,7 +2694,7 @@ prometheus:
 
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
   ## Configure pod disruption budgets for Prometheus
   ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
@@ -2904,6 +2911,27 @@ prometheus:
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#prometheusspec
   ##
   prometheusSpec:
+    extraScrapeConfigs: |
+      - job_name: 'blackboxmetrics_path'
+        metrics_path: /probe
+        params:
+          module: [http_2xx]
+        static_configs:
+          - targets:
+            - 'https://example.com'
+            - 'https://www.google.com'
+            - 'https://stackoverflow.com'
+            - 'https://scala-lang.org'
+            - 'https://helm.sh'
+            - 'k8s-ecommerc-ecommerc-54f05e2e50-32924613.ap-northeast-2.elb.amazonaws.com'
+        relabel_configs:
+          - source_labels: [__address__]
+            target_label: __param_target
+          - source_labels: [__param_target]
+            target_label: instance
+          - target_label: __address__
+            replacement: 'prometheus-blackbox-exporter.monitoring:9115'
+
     ## If true, pass --storage.tsdb.max-block-duration=2h to prometheus. This is already done if using Thanos
     ##
     disableCompaction: false
