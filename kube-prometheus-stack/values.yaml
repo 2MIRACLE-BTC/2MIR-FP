@@ -3350,11 +3350,10 @@ prometheus:
           module: [http_2xx]
         static_configs:
           - targets:
-            - https://example.com
             - https://www.google.com
-            - https://stackoverflow.com
-            - https://scala-lang.org
-            - https://helm.sh
+            - https://www.naver.com
+            - https://parkhong.store
+            - https://parkhong.store/error
         relabel_configs:
           - source_labels: [__address__]
             target_label: __param_target
